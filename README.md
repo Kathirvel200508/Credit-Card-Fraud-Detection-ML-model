@@ -31,7 +31,8 @@ The focus is on **correct feature engineering**, **handling class imbalance**, a
 POST /score
 
 
-### Sample Input
+## Sample Input
+
 ```json
 {
   "amount": 1200,
@@ -44,33 +45,33 @@ POST /score
   "cardholder_age": 28
 }
 Sample Output
+json
+Copy code
 {
   "risk_score": 0.87,
   "decision": "ESCALATE"
 }
-
 Project Structure
+Copy code
 .
 ├── eda_and_model.ipynb
 ├── app.py
 ├── random_forest_model.pkl
 ├── requirements.txt
 └── README.md
-
 How to Run
+bash
+Copy code
 pip install -r requirements.txt
 uvicorn app:app --reload
+Open:
 
-
-Open: http://127.0.0.1:8000/docs
-
+arduino
+Copy code
+http://127.0.0.1:8000/docs
 Key Takeaways
-
 PR-AUC is more reliable than accuracy for fraud detection
 
 Target leakage can inflate metrics if encoding is done incorrectly
 
 Strong feature engineering matters more than complex models
-
-
----
