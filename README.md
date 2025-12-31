@@ -44,18 +44,9 @@ Output
   "decision": "ESCALATE"
 }
 
-Project Structure
-.
-├── eda_and_model.ipynb   # EDA, feature engineering, model training
-├── app.py               # FastAPI inference service
-├── random_forest_model.pkl
-├── requirements.txt
-└── README.md
-
 How to run
 pip install -r requirements.txt
 uvicorn app:app --reload
-
 
 Open: http://127.0.0.1:8000/docs
 
