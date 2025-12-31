@@ -45,13 +45,7 @@ POST /score
   "risk_score": 0.87,
   "decision": "ESCALATE"
 }
-### Project Structure
-.
-├── eda_and_model.ipynb
-├── app.py
-├── random_forest_model.pkl
-├── requirements.txt
-└── README.md
+
 ### How to Run
 pip install -r requirements.txt
 uvicorn app:app --reload
