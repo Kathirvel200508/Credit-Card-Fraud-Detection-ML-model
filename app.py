@@ -51,9 +51,9 @@ def score_transaction(tx: Transaction):
 
     risk_score = model.predict_proba(X)[0][1]
 
-    if risk_score >= 0.9:
+    if risk_score >= 0.8:
         decision = "DECLINE"
-    elif risk_score >= 0.7:
+    elif risk_score >= 0.6:
         decision = "ESCALATE"
     else:
         decision = "APPROVE"
