@@ -44,9 +44,8 @@ POST /score
   "velocity_last_24h": 6,
   "cardholder_age": 28
 }
-Sample Output
+## Sample Output
 json
-Copy code
 {
   "risk_score": 0.87,
   "decision": "ESCALATE"
