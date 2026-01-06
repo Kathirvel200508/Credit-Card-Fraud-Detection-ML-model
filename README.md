@@ -27,7 +27,7 @@ Transactions with uncertain confidence are escalated to an AI-based review layer
 
  - ML model outputs a fraud risk probability
 
-## Decision logic:
+### Decision logic:
 
  - Low risk → APPROVE
 
@@ -41,7 +41,7 @@ Transactions with uncertain confidence are escalated to an AI-based review layer
 
  - This hybrid approach reduces unnecessary manual review while safely handling edge cases.
 
-## Model Performance
+### Model Performance
 
  - PR-AUC: ~0.93
 
@@ -49,7 +49,7 @@ Transactions with uncertain confidence are escalated to an AI-based review layer
 
  - PR-AUC is emphasized due to severe class imbalance in fraud detection problems.
 
-## API Overview
+### API Overview
  - Endpoint
  - POST /score
 
@@ -85,12 +85,12 @@ Transactions with uncertain confidence are escalated to an AI-based review layer
 
  - This mirrors real-world fraud operations where ambiguous cases are escalated for secondary review.
 
-## How to Run
+### How to Run
  - pip install -r requirements.txt
  - uvicorn app:app --reload
 
 
-## API documentation:
+### API documentation:
 
  - http://127.0.0.1:8000/docs
 
