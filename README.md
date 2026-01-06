@@ -1,35 +1,58 @@
-# Credit Card Fraud Detection (ML + FastAPI)
+Credit Card Fraud Detection (ML + FastAPI + AI Review)
 
-This project builds a **credit card fraud detection system** using machine learning and exposes it through a **FastAPI-based REST API** for real-time scoring.
+This project implements a real-time credit card fraud detection system using a traditional machine learning model, exposed via a FastAPI REST API.
+For transactions where the model confidence is low, an AI-based review layer is used as a secondary decision mechanism.
 
-The focus is on **correct feature engineering**, **handling class imbalance**, and **avoiding target leakage**, rather than just achieving high accuracy.
+The focus is on robust feature engineering, handling class imbalance, avoiding target leakage, and building a realistic decision pipeline, rather than only optimizing accuracy.
 
----
+What This Project Does
 
-## What this project does
+Trains a Random Forest classifier to detect fraudulent transactions
 
-- Trains a **Random Forest classifier** to detect fraudulent transactions  
-- Uses **target encoding + frequency encoding** for high-cardinality merchant categories  
-- Evaluates performance using **PR-AUC**, suitable for imbalanced fraud data  
-- Provides a **real-time API** that returns a fraud risk score and decision  
+Applies frequency encoding and target-aware encodings for high-cardinality merchant categories
 
----
+Evaluates performance using PR-AUC, which is more appropriate for imbalanced fraud datasets
 
-## Model Performance
+Exposes a real-time scoring API using FastAPI
 
-- **PR-AUC:** ~0.93  
-- **ROC-AUC:** ~0.99  
+Introduces an AI review layer for medium-confidence transactions to simulate human fraud analyst reasoning
 
-> PR-AUC is emphasized due to heavy class imbalance.
+Logs AI-reviewed transactions for human audit and monitoring
 
----
+Decision Pipeline
 
-## API Overview
+Incoming transaction is processed and feature-engineered
 
-### Endpoint
+ML model outputs a fraud risk probability
+
+Decision logic:
+
+Low risk → APPROVE
+
+High risk → BLOCK
+
+Medium risk → Escalated to AI review
+
+AI review returns a verdict and explanation
+
+Final decision is returned and logged for audit
+
+This hybrid approach reduces unnecessary manual review while still handling edge cases safely.
+
+Model Performance
+
+PR-AUC: ~0.93
+
+ROC-AUC: ~0.99
+
+PR-AUC is emphasized due to severe class imbalance in fraud detection problems.
+
+API Overview
+Endpoint
+
 POST /score
 
-### Sample Input
+Sample Input
 {
   "amount": 1200,
   "transaction_hour": 2,
@@ -40,21 +63,43 @@ POST /score
   "velocity_last_24h": 6,
   "cardholder_age": 28
 }
-### Sample Output
+
+Sample Output
 {
   "risk_score": 0.87,
-  "decision": "ESCALATE"
+  "decision": "BLOCK",
+  "ai_verdict": "FRAUD",
+  "reason": "High transaction velocity combined with low device trust and foreign transaction behavior."
 }
 
-### How to Run
+AI Review System
+
+Triggered only for medium-confidence transactions
+
+Uses an LLM as a decision-support agent, not a replacement for the ML model
+
+Returns a structured verdict and explanation
+
+All AI-reviewed cases are logged to a file for human inspection and evaluation
+
+This mirrors real-world fraud operations where uncertain cases are escalated for additional review.
+
+How to Run
 pip install -r requirements.txt
 uvicorn app:app --reload
-Open:
+
+
+Open API documentation at:
 http://127.0.0.1:8000/docs
 
-### Key Takeaways
-- PR-AUC is more reliable than accuracy for fraud detection
+Key Takeaways
 
-- Target leakage can inflate metrics if encoding is done incorrectly
+PR-AUC is more reliable than accuracy for fraud detection
 
-- Strong feature engineering matters more than complex models
+Incorrect encoding can cause target leakage and inflate metrics
+
+Strong feature engineering often outperforms complex models
+
+Hybrid ML + AI systems are effective for handling ambiguous edge cases
+
+Auditability and fail-safe defaults are critical in financial systems
