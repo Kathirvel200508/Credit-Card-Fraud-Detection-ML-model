@@ -1,4 +1,4 @@
-### Credit Card Fraud Detection
+### CREDIT CARD FRAUD DETECTION
 ## ML + FastAPI + AI Review Pipeline
 ## Overview
 
