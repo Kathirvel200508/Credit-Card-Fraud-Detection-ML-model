@@ -1,6 +1,6 @@
-### CREDIT CARD FRAUD DETECTION
-## ML + FastAPI + AI Review Pipeline
-## Overview
+## CREDIT CARD FRAUD DETECTION
+### ML + FastAPI + AI Review Pipeline
+### Overview
 
  - This project implements a real-time credit card fraud detection system using a traditional machine learning model exposed through a FastAPI REST API.
 Transactions with uncertain confidence are escalated to an AI-based review layer, simulating real-world fraud analyst decision-making.
